@@ -1,0 +1,72 @@
+myapi 
+//รูปแบบการใช้งาน
+myservice => mycontroller => myrouter
+
+ // app.js file
+
+var myRouter = require(./routes/ancs);  //เรียกใช้งาน routes เก็บไว้ที่ตัวแปร myRouter
+
+app.use('/mys', myRouter); //ให้ App เรียกใช้งาน myRouter ส่งค่าไปที่ route /mys 
+
+
+/****************************************************************/
+
+//myservice
+สร้างชื่อ เช่น anc.service.js
+เขียน code 
+const pool = require('../config/database');
+
+module.exports = {
+
+    getHosAnc: (callBack) => {     //ใช้งาน callBack function
+        pool.query(                  //pool query
+            ` sql =?`,
+
+            [prams],
+
+            (error, results, fields) => {
+                if (error) {
+                    callBack(error);
+                }
+                return callBack(null, results);
+            }
+        );
+    },
+}; //ส่งออกค่าที่ได้จากการประมวลผล
+
+/******************************************************************************************/
+
+//mycontroller
+
+const {
+    getHosAnc
+} = require('./anc.service'); //โหลด service เก็บไว้ที่ตัวแปร getHosAnc
+module.exports = {               
+    getHosAnc: (req, res) => {
+        getHosAnc((err, results) => {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            return res.json(results)
+        })
+    }
+};  //ส่งออก ค่าที่ได้ออกไปในรูปแบบ Json
+
+/*************************************************************************************/
+
+//routes
+
+var express = require('express'); //โหลด module express เก็บไว้ที่ตัวแปร  express
+var router = express.Router(); //ประกาศตัวแปร router เก็บค่า express.Router()
+
+const {
+    checkToken
+} = require("../auth/jwt"); //เรียกใช้งาน jwt
+const {
+    getHosAnc
+} = require('../controllers/anc.controller');  //เรียกใช้งาน controller
+router.get('/:tmb/:moo', checkToken, getHosAnc);
+
+module.exports = router; //exports router module
+

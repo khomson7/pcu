@@ -1,0 +1,18 @@
+
+// create user
+
+{
+"username":"user",
+"email":"userapi@gmail.com",
+"password":"##User##"
+}
+
+update user from postman
+
+
+{
+"id":"2", //id
+"username":"u0120", //username
+"email":"saovakon@Toolshos.test", //email
+"password":"11111"  //password
+}

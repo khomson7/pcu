@@ -1,0 +1,4 @@
+anc.service 
+    -/ancs/ตำบล/หมู่  เรียกข้อมูล ANC ตามตำบลที่รับผิดชอบ
+ppspecial.service
+    -/ppspecials/ppspecials2/{vstdate}/{doctorcode}  เรียกข้อมมูลบันทึกคัดกรองบุหรี่-สุรา
