@@ -2,7 +2,8 @@ const {
     getWsEpi,
     getWsPerson,
     getWsAnc,
-    CreateOpdallergy
+    CreateOpdallergy,
+    getTest
 
 } = require('../services/f43export.service');
 
@@ -80,6 +81,25 @@ module.exports = {
                 success: 1,
                 data: results
             });
+        });
+    },
+    getTest: (req, res) => {
+        getTest((err, results) => {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            if (!results) {
+                return res.json({
+                    success: 0,
+                    message: "Reccord Not Found"
+                });
+            }
+            return res.json({
+                success: 1,
+                data: results
+            });
+
         });
     }
 

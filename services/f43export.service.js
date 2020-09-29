@@ -128,4 +128,15 @@ module.exports = {
             }
         );
     },
+    getTest: (callback) => {
+        pool.query(`select * from opd_allergy
+        `,
+            [],
+            (error, results, feilds) => {
+                if (error) {
+                    callback(error);
+                }
+                return callback(null, results);
+            });
+    }
 };

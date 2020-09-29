@@ -5,7 +5,8 @@ const {
     getWsEpi,
     getWsPerson,
     getWsAnc,
-    CreateOpdallergy
+    CreateOpdallergy,
+    getTest
 } = require('../controllers/f43export.controller');
 const {
     checkToken
@@ -14,5 +15,6 @@ const {
 router.get('/epi', checkToken, getWsEpi);
 router.get('/person', getWsPerson);
 router.get('/anc', getWsAnc);
+router.get('/test', getTest);
 router.post('/opdallergy', CreateOpdallergy);
 module.exports = router;
