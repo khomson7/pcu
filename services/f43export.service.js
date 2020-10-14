@@ -56,8 +56,10 @@ module.exports = {
         , person_discharge_id as DISCHARGE, discharge_date as DDISCHARGE
         , null as ABOGROUP, null as RHGROUP, null as LABOR, null as PASSPORT
         , house_regist_type_id as TYPEAREA, last_update as D_UPDATE
-        ,MD5(concat('wsc', last_update)) as apicheck
+        ,MD5(concat('wsc', last_update)) as apicheck,p.person_id
         from person p 
+        INNER JOIN wsc_person_encrypt wp on wp.PID = p.person_id 
+        where wp.check_update <> wp.check_edit
         `,
             [],
             (error, results, feilds) => {
