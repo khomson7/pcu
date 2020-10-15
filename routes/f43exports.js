@@ -6,15 +6,17 @@ const {
     getWsPerson,
     getWsAnc,
     CreateOpdallergy,
-    getTest
+    getTest,
+    getWsepis
 } = require('../controllers/f43export.controller');
 const {
     checkToken
 } = require('../auth/jwt');
 
 router.get('/epi', checkToken, getWsEpi);
-router.get('/person', getWsPerson);
-router.get('/anc', getWsAnc);
+router.get('/person',checkToken, getWsPerson);
+router.get('/anc',checkToken, getWsAnc);
 router.get('/test', getTest);
-router.post('/opdallergy', CreateOpdallergy);
+router.post('/opdallergy',checkToken, CreateOpdallergy);
+router.get('/epis',  getWsepis);
 module.exports = router;

@@ -5,7 +5,7 @@ module.exports = {
 
     create: (data, callBack) => {
         pool.query(
-            `insert into user_hos(id, email, password) 
+            `insert into wsc_user(id, email, pass) 
                       values(?,?,?)`,
 
             [
@@ -25,7 +25,7 @@ module.exports = {
 
     getUsers: callBack => {
         pool.query(
-            `select id,username,email from user_hos`,
+            `select id,email,pass from wsc_user`,
             [],
             (error, results, fields) => {
                 if (error) {
@@ -69,7 +69,7 @@ module.exports = {
     },
     getUserByUserEmail: (email, callBack) => {
         pool.query(
-            `select email,password from user_hos where email = ?`,
+            `select email,pass from wsc_user where email = ?`,
             [email],
             (error, results, fields) => {
                 if (error) {

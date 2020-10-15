@@ -140,5 +140,52 @@ module.exports = {
                 }
                 return callback(null, results);
             });
+    },
+    getWsepis: (callback) => {
+        pool.query(`select t.* FROM
+        (select t.HOSPCODE,t.PID,(select seq_id FROM ovst_seq where vn = t.vn) as SEQ,date_format(t.service_date,'%Y-%m-%d') as DATE_SERV,t.export_vaccine_code as VACCINETYPE 
+        ,t.HOSPCODE as VACCINEPLACE,t.PROVIDER,concat(t.service_date,' ',t.service_time) as D_UPDATE
+        ,MD5(concat('wsc',PID,export_vaccine_code,t.service_date)) as apicheck
+        FROM 
+        (select (select hospitalcode from opdconfig) as HOSPCODE
+        ,LPAD(pw.person_id, 6, '0') as PID
+        ,pws.service_date,pws.service_time,vn,t.export_vaccine_code,t.doctor_code as PROVIDER from person_wbc_service pws
+        LEFT JOIN person_wbc pw on pw.person_wbc_id = pws.person_wbc_id
+        INNER JOIN
+        (select w.person_wbc_service_id,wv.export_vaccine_code,w.doctor_code from person_wbc_vaccine_detail w
+        LEFT JOIN wbc_vaccine wv on wv.wbc_vaccine_id = w.wbc_vaccine_id
+        WHERE wv.export_vaccine_code is not NULL)t on t.person_wbc_service_id = pws.person_wbc_service_id)t)t
+        INNER JOIN wsc_epi_check wc on wc.epikey = t.apicheck
+        where wc.check_update <> wc.check_edit
+        
+        UNION
+        
+        select t.* FROM
+        (select t.HOSPCODE,t.PID,(select seq_id FROM ovst_seq where vn = t.vn) as SEQ,date_format(t.vaccine_date,'%Y-%m-%d') as DATE_SERV,t.export_vaccine_code as VACCINETYPE 
+        ,t.HOSPCODE as VACCINEPLACE,t.PROVIDER,concat(t.vaccine_date,' ',t.vaccine_time) as D_UPDATE
+        ,MD5(concat('wsc',PID,export_vaccine_code,t.vaccine_date)) as apicheck
+        FROM 
+        (select (select hospitalcode from opdconfig) as HOSPCODE
+        ,LPAD(pe.person_id, 6, '0') as PID
+        ,we.vaccine_date,we.vaccine_time 
+        ,t.export_vaccine_code,t.doctor_code as PROVIDER
+        ,vn
+        ,concat(we.vaccine_date,' ',we.vaccine_time) as D_UPDATE
+        from person_epi_vaccine we
+        LEFT JOIN person_epi pe on pe.person_epi_id = we.person_epi_id
+        INNER JOIN
+        (select pev.person_epi_vaccine_id,ev.export_vaccine_code,pev.doctor_code from person_epi_vaccine_list pev
+        LEFT JOIN epi_vaccine ev on ev.epi_vaccine_id = pev.epi_vaccine_id
+        WHERE ev.export_vaccine_code is not NULL)t on t.person_epi_vaccine_id = we.person_epi_vaccine_id)t)t 
+        INNER JOIN wsc_epi_check wc on wc.epikey = t.apicheck
+        where wc.check_update <> wc.check_edit            
+        `,
+            [],
+            (error, results, feilds) => {
+                if (error) {
+                    callback(error);
+                }
+                return callback(null, results);
+            });
     }
 };
