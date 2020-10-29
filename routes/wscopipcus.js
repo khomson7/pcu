@@ -7,6 +7,6 @@ const {
 const {
     checkToken
 } = require('../auth/jwt');
-router.get('/wsopipcu',checkToken, getWsopipcu);
+router.get('/wsopipcu', getWsopipcu);
 
 module.exports = router;
