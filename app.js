@@ -13,6 +13,7 @@ var usersRouter = require('./routes/users');
 var f43exportsRouter = require('./routes/f43exports');
 var personsRouter = require('./routes/persons');
 var wscopipcusRouter = require('./routes/wscopipcus');
+var drugsRouter = require('./routes/drugs');
 
 var app = express();
 
@@ -43,6 +44,8 @@ app.use('/users', usersRouter);
 app.use('/f43exports', f43exportsRouter);
 app.use('/persons', personsRouter);
 app.use('/wscopipcus', wscopipcusRouter);
+app.use('/drugs', drugsRouter);
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
