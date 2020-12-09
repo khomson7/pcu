@@ -1,7 +1,7 @@
 const {
 
-    CreateDrugnew
-    ,CreateDrugitemsrep
+    CreateDrugnew, CreateSdrugnew
+    
 
 } = require('../services/drug.service');
 
@@ -22,9 +22,9 @@ module.exports = {
             });
         });
     },
-    CreateDrugitemsrep: (req, res) => {
+    CreateSdrugnew: (req, res) => {
         const body = req.body;
-        CreateDrugitemsrep(body, (err, results) => {
+        CreateSdrugnew(body, (err, results) => {
             if (err) {
                 console.log(err);
                 return res.status(500).json({

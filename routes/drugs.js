@@ -2,12 +2,12 @@ var express = require('express');
 var router = express.Router();
 
 const {
-CreateDrugnew, CreateDrugitemsrep
+CreateDrugnew ,CreateSdrugnew 
 } = require('../controllers/drug.controller');
 const {
     checkToken
 } = require('../auth/jwt');
 
 router.post('/', CreateDrugnew);
-router.post('/drugitmesrep', CreateDrugitemsrep);
+router.post('/sdrug', CreateSdrugnew);
 module.exports = router;

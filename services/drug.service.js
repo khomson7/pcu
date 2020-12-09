@@ -3,45 +3,18 @@ module.exports = {
 
     CreateDrugnew: (data, callBack) => {
         pool.query(
-            `REPLACE INTO wsc_drugitemes(icode,name)
-            values(?,?)`,
-
-            [
-                data.icode,
-                data.name,
-               
-            ],
-            (error, results, fields) => {
-                if (error) {
-                    callBack(error);
-                }
-                return callBack(null, results)
-            }
-        );
-    },
-    CreateDrugitemsrep: (data, callBack) => {
-        pool.query(
-            `REPLACE INTO drugitemes(icode,name,strength,units,unitprice,dosageform,criticalpriority,drugaccount,drugcategory,drugnote,hintcode,istatus,lastupdatestdprice,lockprice,lockprint
-                ,maxlevel,minlevel,maxunitperdose,packqty,reorderqty,stdprice,stdtaken,therapeutic,therapeuticgroup,default_qty,gpo_code,use_right,i_type,drugusage,high_cost
-                ,must_paid,alert_level,access_level,sticker_short_name,paidst,antibiotic,displaycolor,empty,empty_text,unitcost,gfmiscode,ipd_price,oldcode,habit_forming,did
-                ,stock_type,price2,price3,ipd_price2,ipd_price3,price_lock,pregnancy,pharmacology_group1,pharmacology_group2,pharmacology_group3,generic_name,show_pregnancy_alert
-                ,icode_guid,na,invcode,check_user_group,check_user_name,show_notify,show_notify_text,income,print_sticker_pq,charge_service_opd,charge_service_ipd,ename,dose_type
-                ,habit_forming_type,no_discount,therapeutic_eng,hintcode_eng,limit_drugusage,print_sticker_header,calc_idr_qty,item_in_hospital,no_substock,volume_cc,usage_code
-                ,frequency_code,time_code,dispense_dose,usage_unit_code,dose_per_units,ipd_default_pay,billcode,billnumber,lockprint_ipd,pregnancy_notify_text,show_breast_feeding_alert
-                ,breast_feeding_alert_text,show_child_notify,child_notify_text,child_notify_min_age,child_notify_max_age,continuous,substitute_icode,trade_name,use_right_allow
-                ,medication_machine_id,ipd_medication_machine_id,check_remed_qty,addict,addict_type_id,medication_machine_opd_no,medication_machine_ipd_no,fp_drug,usage_code_ipd,
-                dispense_dose_ipd,usage_unit_code_ipd,frequency_code_ipd,time_code_ipd,print_ipd_injection_sticker,provis_medication_unit_code,hos_guid,sks_product_category_id,
-                sks_clain_control_type_id,sks_drug_code,sks_dfs_code,sks_dfs_text,sks_reimb_price,hos_guid_ext,check_druginteraction_history,check_druginteraction_history_day,
-                nhso_adp_type_id,nhso_adp_code,sks_claim_control_type_id,begin_date,finish_date,name_pr,name_eng,capacity_name,finish_reason,extra_unitcost,drug_control_type_id,
-                name_print,active_ingredient_mg,no_order_g6pd,gender_check,no_order_gender,max_qty,prefer_opd_usage_code,capacity_qty,need_order_reason,drugitems_due_type_id,
-                drugeval_head_id,light_protect,tpu_code_list,inv_map_update,special_advice_text,precaution_advice_text,contra_advice_text,storage_advice_text,qr_code_url,vat_percent,
-                acc_regist,use_paidst,thai_name,fwf_item_id,drugitems_em1_id,drugitems_em2_id,drugitems_em3_id,drugitems_em4_id,tmt_tp_code,tmt_gp_code,limit_pttype,noshow_narcotic,
-                medication_machine_flag,sks_price,print_sticker_by_frequency,print_sticker_pq_ipd,sub_income,prefer_ipd_usage_code,default_qty_ipd,max_qty_ipd,drugusage_ipd,
-                no_popup_ipd_reason,specprep,med_dose_calc_type_id,send_line_notify,show_qrcode_trade,warn_g6pd,ipd_rx_freq_day)
-            values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,
-                ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
-                ,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
-                ,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+            `REPLACE INTO drugitems(icode,name,strength,units,unitprice,dosageform,criticalpriority,drugaccount,drugcategory,drugnote,hintcode,istatus,
+                lastupdatestdprice,lockprice,lockprint,maxlevel,minlevel,maxunitperdose,packqty,reorderqty,stdprice,stdtaken,therapeutic,
+                therapeuticgroup,default_qty,gpo_code,use_right,i_type,drugusage,high_cost,must_paid,alert_level,access_level,sticker_short_name,
+                paidst,antibiotic,displaycolor,empty,empty_text,unitcost,ipd_price,habit_forming,did,price2,price3,
+                ipd_price2,ipd_price3,price_lock,pregnancy,pharmacology_group1,pharmacology_group2,pharmacology_group3,generic_name,show_pregnancy_alert,
+                show_notify,show_notify_text,income,print_sticker_pq,charge_service_opd,charge_service_ipd,
+                ename,dose_type,habit_forming_type,no_discount,therapeutic_eng,hintcode_eng,limit_drugusage,print_sticker_header,calc_idr_qty,item_in_hospital,
+                no_substock,volume_cc,usage_code,frequency_code,time_code,dispense_dose,usage_unit_code,dose_per_units,ipd_default_pay,
+                continuous,substitute_icode,fp_drug,provis_medication_unit_code,sks_product_category_id,sks_drug_code,
+                sks_dfs_text,tpu_code_list)
+                values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,
+                    ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
 
             [
                 data.icode,
@@ -84,12 +57,9 @@ module.exports = {
                 data.empty,
                 data.empty_text,
                 data.unitcost,
-                data.gfmiscode,
                 data.ipd_price,
-                data.oldcode,
                 data.habit_forming,
                 data.did,
-                data.stock_type,
                 data.price2,
                 data.price3,
                 data.ipd_price2,
@@ -101,11 +71,6 @@ module.exports = {
                 data.pharmacology_group3,
                 data.generic_name,
                 data.show_pregnancy_alert,
-                data.icode_guid,
-                data.na,
-                data.invcode,
-                data.check_user_group,
-                data.check_user_name,
                 data.show_notify,
                 data.show_notify_text,
                 data.income,
@@ -131,104 +96,51 @@ module.exports = {
                 data.usage_unit_code,
                 data.dose_per_units,
                 data.ipd_default_pay,
-                data.billcode,
-                data.billnumber,
-                data.lockprint_ipd,
-                data.pregnancy_notify_text,
-                data.show_breast_feeding_alert,
-                data.breast_feeding_alert_text,
-                data.show_child_notify,
-                data.child_notify_text,
-                data.child_notify_min_age,
-                data.child_notify_max_age,
                 data.continuous,
                 data.substitute_icode,
-                data.trade_name,
-                data.use_right_allow,
-                data.medication_machine_id,
-                data.ipd_medication_machine_id,
-                data.check_remed_qty,
-                data.addict,
-                data.addict_type_id,
-                data.medication_machine_opd_no,
-                data.medication_machine_ipd_no,
                 data.fp_drug,
-                data.usage_code_ipd,
-                data.dispense_dose_ipd,
-                data.usage_unit_code_ipd,
-                data.frequency_code_ipd,
-                data.time_code_ipd,
-                data.print_ipd_injection_sticker,
                 data.provis_medication_unit_code,
-                data.hos_guid,
                 data.sks_product_category_id,
-                data.sks_clain_control_type_id,
                 data.sks_drug_code,
-                data.sks_dfs_code,
                 data.sks_dfs_text,
-                data.sks_reimb_price,
-                data.hos_guid_ext,
-                data.check_druginteraction_history,
-                data.check_druginteraction_history_day,
-                data.nhso_adp_type_id,
-                data.nhso_adp_code,
-                data.sks_claim_control_type_id,
-                data.begin_date,
-                data.finish_date,
-                data.name_pr,
-                data.name_eng,
-                data.capacity_name,
-                data.finish_reason,
-                data.extra_unitcost,
-                data.drug_control_type_id,
-                data.name_print,
-                data.active_ingredient_mg,
-                data.no_order_g6pd,
-                data.gender_check,
-                data.no_order_gender,
-                data.max_qty,
-                data.prefer_opd_usage_code,
-                data.capacity_qty,
-                data.need_order_reason,
-                data.drugitems_due_type_id,
-                data.drugeval_head_id,
-                data.light_protect,
                 data.tpu_code_list,
-                data.inv_map_update,
-                data.special_advice_text,
-                data.precaution_advice_text,
-                data.contra_advice_text,
-                data.storage_advice_text,
-                data.qr_code_url,
-                data.vat_percent,
-                data.acc_regist,
-                data.use_paidst,
-                data.thai_name,
-                data.fwf_item_id,
-                data.drugitems_em1_id,
-                data.drugitems_em2_id,
-                data.drugitems_em3_id,
-                data.drugitems_em4_id,
-                data.tmt_tp_code,
-                data.tmt_gp_code,
-                data.limit_pttype,
-                data.noshow_narcotic,
-                data.medication_machine_flag,
-                data.sks_price,
-                data.print_sticker_by_frequency,
-                data.print_sticker_pq_ipd,
-                data.sub_income,
-                data.prefer_ipd_usage_code,
-                data.default_qty_ipd,
-                data.max_qty_ipd,
-                data.drugusage_ipd,
-                data.no_popup_ipd_reason,
-                data.specprep,
-                data.med_dose_calc_type_id,
-                data.send_line_notify,
-                data.show_qrcode_trade,
-                data.warn_g6pd,
-                data.ipd_rx_freq_day,
+            ],
+            (error, results, fields) => {
+                if (error) {
+                    callBack(error);
+                }
+                return callBack(null, results)
+            }
+        );
+    },
+    CreateSdrugnew: (data, callBack) => {
+        pool.query(
+            `REPLACE INTO s_drugitems(icode,name,strength,units,dosageform,drugnote,use_right,must_paid 
+                ,istatus,access_level,paidst,displaycolor,price_lock,ename,cost,income,is_medication,is_medsupply,highcost
+                )
+                values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+
+            [
+                data.icode,
+                data.name,
+                data.strength,
+                data.units,
+                data.dosageform,
+                data.drugnote,
+                data.use_right,
+                data.must_paid,
+                data.istatus,
+                data.access_level,
+                data.paidst,
+                data.displaycolor,
+                data.price_lock,
+                data.ename,
+                data.cost,
+                data.income,
+                data.is_medication,
+                data.is_medsupply,
+                data.highcost,
+                
                
             ],
             (error, results, fields) => {
