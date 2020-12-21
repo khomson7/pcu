@@ -8,6 +8,6 @@ const {
     checkToken
 } = require('../auth/jwt');
 
-router.post('/', CreateDrugnew);
-router.post('/sdrug', CreateSdrugnew);
+router.post('/',checkToken, CreateDrugnew);
+router.post('/sdrug',checkToken, CreateSdrugnew);
 module.exports = router;
