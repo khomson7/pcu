@@ -1,3 +1,5 @@
+drug.service
+    -ปรับปรุงการนำเข้าข้อมูลยาจากโรงพยาบาล
 anc.service 
     -/ancs/ตำบล/หมู่  เรียกข้อมูล ANC ตามตำบลที่รับผิดชอบ
 ppspecial.service
