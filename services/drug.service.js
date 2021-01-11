@@ -5,7 +5,7 @@ module.exports = {
         pool.query(
             `REPLACE INTO drugitems(icode,name,strength,units,unitprice,dosageform,criticalpriority,drugaccount,drugcategory,drugnote,hintcode,istatus,
                 lastupdatestdprice,lockprice,lockprint,maxlevel,minlevel,maxunitperdose,packqty,reorderqty,stdprice,stdtaken,therapeutic,
-                therapeuticgroup,default_qty,gpo_code,use_right,i_type,drugusage,high_cost,must_paid,alert_level,access_level,sticker_short_name,
+                therapeuticgroup,default_qty,gpo_code,use_right,i_type,drugusage,must_paid,alert_level,access_level,sticker_short_name,
                 paidst,antibiotic,displaycolor,empty,empty_text,unitcost,ipd_price,habit_forming,did,price2,price3,
                 ipd_price2,ipd_price3,price_lock,pregnancy,pharmacology_group1,pharmacology_group2,pharmacology_group3,generic_name,show_pregnancy_alert,
                 show_notify,show_notify_text,income,print_sticker_pq,charge_service_opd,charge_service_ipd,
@@ -14,7 +14,7 @@ module.exports = {
                 continuous,substitute_icode,fp_drug,provis_medication_unit_code,sks_product_category_id,sks_drug_code,
                 sks_dfs_text,tpu_code_list)
                 values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,
-                    ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+                    ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
 
             [
                 data.icode,
@@ -46,7 +46,6 @@ module.exports = {
                 data.use_right,
                 data.i_type,
                 data.drugusage,
-                data.high_cost,
                 data.must_paid,
                 data.alert_level,
                 data.access_level,
@@ -116,9 +115,9 @@ module.exports = {
     CreateSdrugnew: (data, callBack) => {
         pool.query(
             `REPLACE INTO s_drugitems(icode,name,strength,units,dosageform,drugnote,use_right,must_paid 
-                ,istatus,access_level,paidst,displaycolor,price_lock,ename,cost,income,is_medication,is_medsupply,highcost
+                ,istatus,access_level,paidst,displaycolor,price_lock,ename,cost,income,is_medication,is_medsupply
                 )
-                values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+                values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
 
             [
                 data.icode,
@@ -139,9 +138,7 @@ module.exports = {
                 data.income,
                 data.is_medication,
                 data.is_medsupply,
-                data.highcost,
-                
-               
+                          
             ],
             (error, results, fields) => {
                 if (error) {
