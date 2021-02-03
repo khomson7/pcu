@@ -15,6 +15,8 @@ var personsRouter = require('./routes/persons');
 var wscopipcusRouter = require('./routes/wscopipcus');
 var drugsRouter = require('./routes/drugs');
 var episRouter = require('./routes/epis');
+var fromwscsRouter = require('./routes/fromwscs');
+var towscsRouter = require('./routes/towscs');
 
 var app = express();
 
@@ -47,6 +49,8 @@ app.use('/persons', personsRouter);
 app.use('/wscopipcus', wscopipcusRouter);
 app.use('/drugs', drugsRouter);
 app.use('/epis', episRouter);
+app.use('/fromwscs', fromwscsRouter);
+app.use('/towscs', towscsRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
